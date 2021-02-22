@@ -51,32 +51,13 @@ app.get('/sentiment', function (req, res) {
 app.post('/sentiment', async function (req, res) {
     console.log(req.body);
     const news = req.body.url;
-    const url = baseUrl + "?key=" + API_KEY + "&of=json&" + "url= " +news + "&lang=en";
-    console.log(url);
 
     try {
-        const sentimentData = await fetchSentimentData(news,baseUrl,API_KEY);
+        const sentimentData = await fetchSentimentData(news, baseUrl, API_KEY);
         return res.send(sentimentData);
     } catch (error) {
         console.log("error", error);
     }
-
-   // const data = fetchSentimentData(news,baseUrl,API_KEY);
-/*
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({}),    /xy/No body needed
-    });
-    
-    try {
-        const sentimentData = await response.json();
-        return res.send(sentimentData);
-    } catch (error) {
-        console.log("error", error);
-    }*/
     return res.send(data);
 })
 
@@ -86,10 +67,7 @@ app.post('/sentiment', async function (req, res) {
 
 const fetchSentimentData = async (input, baseUrl, apiKey) => {
     console.log("::: Fetching Sentiment :::")
-    let baseDummy = "https://api.meaningcloud.com/sentiment-2.1";
-
-    const news = "https://apnews.com/article/biden-inauguration-joe-biden-donald-trump-biden-cabinet-iran-nuclear-b7838bf96681674211b2b2b3a421385e"
-    const url = baseDummy + "?key=" + apiKey + "&of=json&" + "url= " +news + "&lang=en";
+    const url = baseUrl + "?key=" + apiKey + "&of=json&" + "url= " + input + "&lang=en";
     console.log(url);
 
     const response = await fetch(url, {
@@ -103,42 +81,6 @@ const fetchSentimentData = async (input, baseUrl, apiKey) => {
     try {
         console.log(response);
         const newData = await response.json();
-        console.log(newData.subjectivity);
-        console.log(newData.agreement);
-        console.log(newData.score_tag);
-        return newData;
-    } catch (error) {
-        console.log("error", error);
-    }
-}
-
-
-const postSentimentData = async (input, baseUrl, apiKey) => {
-    console.log("::: Fetching Sentiment :::")
-    let baseDummy = "https://api.meaningcloud.com/sentiment-2.1";
-
-    const news = "https://apnews.com/article/biden-inauguration-joe-biden-donald-trump-biden-cabinet-iran-nuclear-b7838bf96681674211b2b2b3a421385e"
-
-    const url = baseDummy + "?key=" + apiKey + "&of=json&" + "url= " +news + "&lang=en";
-
-    console.log(url);
-
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({}),    
-    });
-
-    try {
-        console.log(response);
-        const newData = await response.json();
-        console.log(newData.subjectivity);
-        console.log(newData.agreement);
-        console.log(newData.score_tag);
-
-
         return newData;
     } catch (error) {
         console.log("error", error);

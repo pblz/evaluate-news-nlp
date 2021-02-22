@@ -6,46 +6,55 @@ function handleSubmit(event) {
     console.log(formText);
 
     const text = '{ "url" : formText.stringify() }';
-    const json = { "url" : formText };
+    const json = { "url": formText };
 
     console.log("this is the json" + text);
 
     //Client.checkForName(formText)
     postData('http://localhost:8081/sentiment', json)
 
-    .then(function(sentimentData){
-        let sentimentString = '';
-        switch(sentimentData.score_tag) {
-            case 'P+':
-                sentimentString = 'strong positive';
-              break;
-            case 'P':
-            sentimentString =  'positive';
-            break;
-            case 'NEU':
-            sentimentString =  'neutral'
-            break;
-            case 'N':
-            sentimentString =  'negative'
-            break;
-            case 'N+':
-            sentimentString =  'strong negative'
-            break;
-            case 'NONE':
-            sentimentString =  'without sentiment'
-            break;
-            default:
-
-              // code block
-          }
-        const polarity = sentimentData.score_tag
-        document.getElementById('score_tag').innerHTML = " Sentiment: The polarity found is " + sentimentString ;
-        document.getElementById('agreement').innerHTML = " There is " + sentimentData.agreement.toLowerCase() + ' between different elements of the text';
-        document.getElementById('subjectivity').innerHTML = " The text is: " + sentimentData.subjectivity.toLowerCase() ;
-        document.getElementById('irony').innerHTML = " The text is " + sentimentData.irony.toLowerCase() ;
-    })
+        .then(function (sentimentData) {
+            if ((sentimentData === undefined) || 
+                (sentimentData.status.code !== '0')
+            ){
+                console.log(sentimentData.status);
+                document.getElementById('results').innerHTML = "No results found ";
+            } else {
+                console.log(sentimentData);
+                updateUI(sentimentData);
+            }
+        })
 }
 
+function updateUI(sentimentData) {
+    let sentimentString = '';
+    switch (sentimentData.score_tag) {
+        case 'P+':
+            sentimentString = 'strong positive';
+            break;
+        case 'P':
+            sentimentString = 'positive';
+            break;
+        case 'NEU':
+            sentimentString = 'neutral'
+            break;
+        case 'N':
+            sentimentString = 'negative'
+            break;
+        case 'N+':
+            sentimentString = 'strong negative'
+            break;
+        case 'NONE':
+            sentimentString = 'without sentiment'
+            break;
+        default: break;
+    }
+    const polarity = sentimentData.score_tag;
+    document.getElementById('score_tag').innerHTML = " Sentiment: The polarity found is " + sentimentString;
+    document.getElementById('agreement').innerHTML = " There is " + sentimentData.agreement.toLowerCase() + ' between different elements of the text';
+    document.getElementById('subjectivity').innerHTML = " The text is: " + sentimentData.subjectivity.toLowerCase();
+    document.getElementById('irony').innerHTML = " The text is " + sentimentData.irony.toLowerCase();
+}
 /* asynchronous function to post the data from the app to server side
 */
 const postData = async (url = '', data = {}) => {
@@ -55,7 +64,7 @@ const postData = async (url = '', data = {}) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),    
+        body: JSON.stringify(data),
     });
 
     try {

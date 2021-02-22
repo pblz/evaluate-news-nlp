@@ -1,43 +1,83 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Test</title>
-        <link rel="stylesheet" href="/styles/resets.css">
-        <link rel="stylesheet" href="/styles/base.css">
-        <link rel="stylesheet" href="/styles/header.css">
-        <link rel="stylesheet" href="/styles/form.css">
-        <link rel="stylesheet" href="/styles/footer.css">
-    </head>
 
-    <body>
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="/styles/resets.css">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/form.css">
+    <link rel="stylesheet" href="/styles/results.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+</head>
 
-        <header>
-            <div class="">
-                Logo
+<body>
+
+    <header>
+        <div>Powered by
+            <a class="logo" href="//www.meaningcloud.com">
+                <img id="logo-header" src="https://www.meaningcloud.com/developer/img/LogoMeaningCloud210x85.png" alt="Logo">
+            </a>
+        </div>
+
+        <div class="">
+            About
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <h1 class="title"> Evaluate News - </br>Sentiment Analysis</h1>
+            <div class="logo">
             </div>
-            <div class="">
-                navigation
+        </section>
+        <section>
+            <form class="" onsubmit="return Client.handleSubmit(event)">
+                <input id="input" type="text" name="input" value="" onblur="onBlur()" placeholder="Enter URL of Article to Analyze">
+                <input type="submit" id="sentiment" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)"
+                    value="Analyze">
+            </form>
+        </section>
+
+        <section class="results">
+            The following results where found for your Article
+            <div id="results">
+                <p id="score_tag"></p>
+                <p id="agreement"></p>
+                <p id="subjectivity"></p>
+                <p id="irony"></p>
+
+                <h3>How to read your result:</h3>
+                <div>
+                    <b>Sentiment</b> indicates the polarity found (or not found) in the element it refers to </div>
+                <div>
+                    <b>Agreement</b> the different elements have the same polarity OR DISAGREEMENT: there is disagreement between
+                    the different elements' polarity.</div>
+                <div>
+                    <b>Subjectivity</b> marks the subjectivity of the text. It has two possible values: OBJECTIVE: the text
+                    does not have any subjectivity marks. SUBJECTIVE: the text has subjective marks.</div>
+                <div>
+                    <b>Irony</b> indicates the irony of the text. NONIRONIC: the text does not have ironic marks IRONIC: the
+                    text has ironic marks
+                </div>
             </div>
-        </header>
+        
 
-        <main>
-            <section>
-                <form class="" onsubmit="return Client.handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
-                    <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
-                </form>
-            </section>
+        </section>
+    </main>
 
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
-            </section>
-        </main>
+    <footer class="footer">
+        Photo by
+        <a href="https://unsplash.com/@joshrh19?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
+            Joshua Rawson-Harris </a>
+        on
+        <a href="https://unsplash.com/s/photos/news?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
+            Unsplash </a>
+    </footer>
 
-        <footer>
-            <p>This is a footer</p>
-        </footer>
+</body>
 
-    </body>
 </html>

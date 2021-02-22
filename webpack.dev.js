@@ -6,15 +6,33 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
     entry: './src/client/index.js',
     mode: 'development',
+    output: {
+        path: path.join(__dirname, 'dist'),
+        filename: 'bundle.min.js',
+        libraryTarget: 'var',
+        library: 'Client'
+    },
     devtool: 'source-map',
-    stats: 'verbose',
     module: {
         rules: [
             {
                 test: '/\.js$/',
                 exclude: /node_modules/,
                 loader: "babel-loader"
-            }
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ]
+              },
+            {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            },
+            
         ]
     },
     plugins: [

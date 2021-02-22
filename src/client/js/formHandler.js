@@ -21,40 +21,11 @@ function handleSubmit(event) {
                 document.getElementById('results').innerHTML = "No results found ";
             } else {
                 console.log(sentimentData);
-                updateUI(sentimentData);
+                Client.updateUI(sentimentData);
             }
         })
 }
 
-function updateUI(sentimentData) {
-    let sentimentString = '';
-    switch (sentimentData.score_tag) {
-        case 'P+':
-            sentimentString = 'strong positive';
-            break;
-        case 'P':
-            sentimentString = 'positive';
-            break;
-        case 'NEU':
-            sentimentString = 'neutral'
-            break;
-        case 'N':
-            sentimentString = 'negative'
-            break;
-        case 'N+':
-            sentimentString = 'strong negative'
-            break;
-        case 'NONE':
-            sentimentString = 'without sentiment'
-            break;
-        default: break;
-    }
-    const polarity = sentimentData.score_tag;
-    document.getElementById('score_tag').innerHTML = " Sentiment: The polarity found is " + sentimentString;
-    document.getElementById('agreement').innerHTML = " There is " + sentimentData.agreement.toLowerCase() + ' between different elements of the text';
-    document.getElementById('subjectivity').innerHTML = " The text is: " + sentimentData.subjectivity.toLowerCase();
-    document.getElementById('irony').innerHTML = " The text is " + sentimentData.irony.toLowerCase();
-}
 /* asynchronous function to post the data from the app to server side
 */
 const postData = async (url = '', data = {}) => {

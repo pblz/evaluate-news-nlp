@@ -3,7 +3,16 @@ function handleSubmit(event) {
     console.log("::: Sentiment Analyze Request Submitted :::")
     // check what text was put into the form field
     let formText = document.getElementById('input').value;
+    
+    //TODO:
+    //^(http|https)://
+    let re = /^(http|https):/;
+    var valid = re.test(formText);
+    if(!valid){
+        alert("Please make sure you entered a valid URL");
+    }
     console.log(formText);
+    console.log(valid);
 
     const text = '{ "url" : formText.stringify() }';
     const json = { "url": formText };
@@ -17,8 +26,9 @@ function handleSubmit(event) {
                 (sentimentData.status.code !== '0')
             ){
                 console.log(sentimentData.status);
-                document.getElementById('results').innerHTML = "No results found ";
+                document.getElementById('noresults').innerHTML = "No results found ";
             } else {
+                document.getElementById('noresults').innerHTML = "";
                 console.log(sentimentData);
                 Client.updateUI(sentimentData);
             }

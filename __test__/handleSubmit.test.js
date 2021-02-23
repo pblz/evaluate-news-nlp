@@ -1,6 +1,7 @@
 import { handleSubmit } from "../src/client/js/formHandler"
 import { tsModuleBlock } from "@babel/types";
-import 'regenerator-runtime/runtime';
+import { setupTests } from "./setupTests";
+
 const EventEmitter = require('events');
 
 describe("Testing the submit functionality", () => {

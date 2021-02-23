@@ -1,6 +1,5 @@
 import { handleSubmit } from "../src/client/js/formHandler"
 import { tsModuleBlock } from "@babel/types";
-import { setupTests } from "./setupTests";
 
 const EventEmitter = require('events');
 

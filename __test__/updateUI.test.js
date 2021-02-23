@@ -1,5 +1,4 @@
 import { updateUI } from "../src/client/js/updateUI"
-import 'regenerator-runtime/runtime';
 
 describe("Testing updateUI", () => {
 

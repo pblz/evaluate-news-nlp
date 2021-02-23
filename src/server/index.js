@@ -62,9 +62,7 @@ app.post('/sentiment', async function (req, res) {
 })
 
 
-
 /* Functions for Fetching from API */
-
 const fetchSentimentData = async (input, baseUrl, apiKey) => {
     console.log("::: Fetching Sentiment :::")
     const url = baseUrl + "?key=" + apiKey + "&of=json&" + "url= " + input + "&lang=en";

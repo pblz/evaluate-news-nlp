@@ -53,10 +53,12 @@
 
                 <h3>How to read your result:</h3>
                 <div>
-                    <b>Sentiment</b> indicates the polarity found (or not found) in the element it refers to </div>
+                    <b>Sentiment</b> indicates the polarity found (or not found) in the element it refers to
+                </div>
                 <div>
                     <b>Agreement</b> the different elements have the same polarity OR DISAGREEMENT: there is disagreement between
-                    the different elements' polarity.</div>
+                    the different elements' polarity.
+                </div>
                 <div>
                     <b>Subjectivity</b> marks the subjectivity of the text. It has two possible values: OBJECTIVE: the text
                     does not have any subjectivity marks. SUBJECTIVE: the text has subjective marks.</div>
@@ -65,8 +67,6 @@
                     text has ironic marks
                 </div>
             </div>
-        
-
         </section>
     </main>
 
@@ -78,7 +78,15 @@
         <a href="https://unsplash.com/s/photos/news?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
             Unsplash </a>
     </footer>
-
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+    </script>
 </body>
 
 </html>
